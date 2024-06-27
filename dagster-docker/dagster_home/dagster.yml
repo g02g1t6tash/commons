@@ -1,0 +1,19 @@
+storage:
+  postgres:
+    postgres_db:
+      username: postgres
+      password: secret
+      hostname: dagster-postgres
+      db_name: postgres
+      port: 5432
+
+run_launcher:
+  module: dagster.core.launcher
+  class: DefaultRunLauncher
+
+run_coordinator:
+  module: dagster.core.run_coordinator
+  class: QueuedRunCoordinator
+
+telemetry:
+  enabled: false

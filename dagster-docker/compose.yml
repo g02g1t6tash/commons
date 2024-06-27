@@ -1,0 +1,34 @@
+version: '3'
+services:
+  dagster-dagit:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./dagster_home:/opt/dagster/dagster_home
+    environment:
+      - DAGSTER_HOME=/opt/dagster/dagster_home
+
+  dagster-daemon:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: dagster-daemon run
+    volumes:
+      - ./dagster_home:/opt/dagster/dagster_home
+    environment:
+      - DAGSTER_HOME=/opt/dagster/dagster_home
+
+  dagster-postgres:
+    image: postgres:13
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=secret
+    volumes:
+      - dagster-postgres-data:/var/lib/postgresql/data
+
+volumes:
+  dagster-postgres-data:
