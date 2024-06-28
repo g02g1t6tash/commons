@@ -2,6 +2,7 @@ import pandas as pd
 from prophet import Prophet
 from prophet.plot import plot_plotly, plot_components_plotly
 import matplotlib.pyplot as plt
+import numpy as np
 
 # 1. Load and prepare data
 def load_data(file_path):
